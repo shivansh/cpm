@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# TODO Symlink $src
+src="/usr/share/cowsay/cows"
+server="localhost:8085"
+cow="$1.cow"
+
+fetch_cow() {
+  wget -P $src $server/$cow &> /dev/null
+  if [[ $? -ne 0 ]]; then
+    echo "No cow with this name exists currently, want to contribute ?"
+    exit 1
+  else
+    echo "Enjoy your new holy cow !!" | cowsay -y -f $cow
+  fi
+}
+
+if [[ -f "$src/$cow" ]]; then
+  read -p "A cow with the same name exists, continue? (y/n) " yn
+  case $yn in
+    [n] ) exit;;
+    [y] ) fetch_cow;;
+    [*] ) echo "Invalid option"
+  esac
+else
+  fetch_cow
+fi
