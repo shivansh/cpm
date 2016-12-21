@@ -11,8 +11,7 @@
 #                       ||     ||
 
 # Find the fortune cookie
-fortune_msg=$(fortune -c)
-# fortune_cookie=$(echo "$fortune_msg" | sed -n 1p | cut -c2- | rev | cut -c2- | rev)
+fortune_cookie=$(echo "$fortune_msg" | sed -n 1p | cut -c2- | rev | cut -c2- | rev)
 fortune_cookie="debian"
 
 i=0

@@ -11,8 +11,8 @@
 #                        ||     ||
 
 # TODO Update the barn
-server="localhost:8085"   # Marketplace, all the deals happen here
-barn="/usr/share/cowsay"  # This is where your cows reside in peace
+server="https://raw.githubusercontent.com/shivrai/cpm/master"   # Marketplace, all the deals happen here
+barn="~/cpm"  # This is where your cows reside in peace
 fetch_index=0             # Flipped when user wants to update his entire barn
 clobber=0                 # Flipped when user wants to have multiple similar cows
 TIMEOUT=2                 # Sleep timeout duration (in seconds)
