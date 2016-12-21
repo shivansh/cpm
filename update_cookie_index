@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#       *-------------------------------------------*
+#       | Updates the "cookie_index" by associating |
+#       | cookies with corresponding cows.          |
+#       | Current complexity: θ( #cookies * #cows ) |
+#       *-------------------------------------------*
+#               o   ^__^
+#                o  (OO)\_______
+#                   (__)\       )\/\
+#                       ||----w |
+#                       ||     ||
+
+for cow in $(ls cows)
+do
+  cow=$(echo "$cow" | cut -f 1 -d '.')
+  cow_cookies=$(cat "cows/$cow.cow" | tail -1)
+  for cookie in $(echo $cow_cookies | sed "s/,/ /g")
+  do
+    # Retrieve ',' delimited "$cow_cookies" from cookie_index, and see if "$cow" is present
+    while read cookie_line
+    do
+      flag=0    # Flipped if "cookie" in "cookie_index" already contains the "$cow"
+      for new_cookie in $(echo $cookie_line | sed "s/,/ /g")
+      do
+        if [[ "$cow" == "$new_cookie" ]]; then
+          flag=1
+          break
+        fi
+      done
+
+      if [[ $flag == 0 ]]; then
+        # We didn't find the cow, append it
+        sed -i "/$cookie/ s/$/,$cow/" cookie_index
+      fi
+
+    done < <(grep "$cookie" cookie_index)
+  done
+done
