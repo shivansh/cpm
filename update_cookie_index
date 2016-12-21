@@ -29,7 +29,7 @@ do
         fi
       done
 
-      if [[ $flag == 0 ]]; then
+      if [[ $flag -eq 0 ]]; then
         # We didn't find the cow, append it
         sed -i "/$cookie/ s/$/,$cow/" cookie_index
       fi

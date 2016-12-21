@@ -63,9 +63,9 @@ fi
 fetch_cow() {
   ( cd cows && wget "$server/cows/$cow" -o cow-debug.log )
   if [[ $? -ne 0 ]]; then
-    if [[ $clobber == 0 ]]; then
+    if [[ $clobber -eq 0 ]]; then
       moo="Sadly no cow with this name exits."
-    elif [[ $clobber == 1 ]]; then
+    elif [[ $clobber -eq 1 ]]; then
       moo="Unable to fetch cow. View cow-debug.log for more details."
     fi
     echo $moo | cowsay -e "oO"
