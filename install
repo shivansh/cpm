@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#       *------------------------------------------*
+#       | Use this script for setting up your barn |
+#       *------------------------------------------*
+#               o   ^__^
+#                o  (OO)\_______
+#                   (__)\       )\/\
+#                       ||----w |
+#                       ||     ||
+
+# Check if all the requirements are met.
+which cowsay
+if [[ $? -ne 0 ]]; then
+  echo "Please install cowsay to proceed !!"
+  exit 1
+fi
+
+which fortune
+if [[ $? -ne 0 ]]; then
+  echo "Please install fortune to proceed !!"
+  exit 1
+fi
+
+git clone git@github.com:shivrai/cpm.git ~/cpm
+
+# Find the user's shell
+shell=$(which $SHELL | rev | cut -f 1 -d '/' | rev)
+echo ". ~/cpm/cow_selector" >> ~/."$shell"rc
