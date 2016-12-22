@@ -10,19 +10,17 @@
 #                       ||     ||
 
 # Check if all the requirements are met.
-which cowsay
+which cowsay &> /dev/null
 if [ $? -ne 0 ]; then
   echo "Please install cowsay to proceed !!"
   exit 1
 fi
 
-which fortune
+which fortune &> /dev/null
 if [ $? -ne 0 ]; then
   echo "Please install fortune to proceed !!"
   exit 1
 fi
-
-git clone https://github.com/shivrai/cpm.git
 
 # Find the user's shell
 shell=$(which $SHELL | rev | cut -f 1 -d '/' | rev)

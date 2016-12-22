@@ -11,8 +11,8 @@
 #                       ||     ||
 
 # Find the fortune cookie
+fortune_msg=$(fortune -c)
 fortune_cookie=$(echo "$fortune_msg" | sed -n 1p | cut -c2- | rev | cut -c2- | rev)
-fortune_cookie="debian"
 
 i=0
 check=0
@@ -28,10 +28,10 @@ do
     cookie_arr[$i]="$cookie"
     ((i=i+1))
   done
-done < <(grep "$fortune_cookie" cookie_index)
+done < <(grep "$fortune_cookie" ~/cpm/cookie_index)
 
 if [ $i -eq 0 ]; then
-  # Sadly we don't have any cow associated with this cookie yet, hence we use the "default" cow.
+  # Sadly, we don't have any cow associated with this cookie yet. Hence we use the "default" cow.
   echo "$fortune_msg" | tail -n +3 | cowsay
 else
   rand=$[ $RANDOM % $i ]
