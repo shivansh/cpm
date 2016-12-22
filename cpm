@@ -25,7 +25,7 @@ cleanup() {
 }
 
 # Walk up to your barn, the cows cannot use telecommunication yet!!
-cd $barn
+# cd $barn
 
 # Make sure you follow protocol while requesting cows...they can be stubborn sometimes.
 if [ $1 != "fetch" ]; then
@@ -67,12 +67,11 @@ fetch_cow() {
       moo="Unable to fetch cow. View cow-debug.log for more details."
     fi
     echo $moo | cowsay -e "oO"
+    cleanup
     exit 1
-  else
-    if [ $fetch_index -ne 1 ]; then
+  elif [ $fetch_index -ne 1 ]; then
       moo="Enjoy your new holy cow !!"
       echo $moo | cowsay -f $cow
-    fi
   fi
 }
 
@@ -102,10 +101,10 @@ update_barn() {
     fi
     echo "Luring new cows..."
     sleep $TIMEOUT
-    while IFS='' read -r new_cow; do
-      cow=$new_cow
+    while IFS='' read new_cow; do
+      cow="$new_cow"
       fetch_cow
-    done < "cow_diff"
+    done< "cow_diff"
     ( echo -e "These cows were added to your barn ⇒  \n" && cat cow_diff ) | cowsay
     # Update the cow_index
     mv -f new_cow_index cow_index
