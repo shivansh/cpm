@@ -54,7 +54,7 @@ You can also update your entire barn with all the new cows lurking out there -
 ```
 Perhaps you might also find the above command useful in case some of your cows fled without you knowing (believe it or not, there have been many such reported cases !).
 
-Each time you fire up your login shell, `cow_selector` script runs. It randomly generates a fortune message, and gets the respective fortune cookie. It then looks in the `cookie_index` for all the cows that are present corresponding to that cookie and randomly picks one.
+Each time you fire up your login shell,  the `cow_selector` script runs. It randomly generates a fortune message, and gets the respective fortune cookie. It then looks in the `cookie_index` for all the cows that correspond to that cookie and randomly picks one.
 
 ### But there is a catch !!
 While generation of a random cookie is taken care of by the **fortune** command, the cow which gets displayed along is decided by the `cow_selector` script. And for that to happen the generated cookie needs to be associated with **atleast** one cow. The more entries there are in `cookie_index`, the more cow-cookie diversity will be there each time you start your shell. <br>
@@ -76,11 +76,16 @@ git clone https://github.com/shivrai/cpm.git
 ## Want to contribute ?
 Have a new ASCII art ? Want to associate a cow with new cookies ? Pull requests are more than welcome.
 
-After adding new cows or adding cookies to cow files, run the following command -
+After adding new cows, update `cow_index` by running -
+```
+ls cows >! cow_index
+```
+
+After adding adding cookies to cow files, run the following command -
 ```
 ./update_cookie_index
 ```
-This will automatically update the `cow_index` will all the new cow(s) associated with their corresponding cookies.
+This will automatically update the `cookie_index` will all the new cow(s) associated with their corresponding cookies.
 
 Some conventions to be taken care of while making changes -
 * When adding new cookies to cow files, make sure you use a `,` for delimiting.
@@ -89,6 +94,7 @@ Some conventions to be taken care of while making changes -
 
 ## Todo
 * Add feature for specifying probability/score along with cows associated with each cookie to control their chances of occurrence.
+* If a cookie is removed from a cow, add functionality in `update_cookie_index` to automatically make relevant changes in `cookie_index`.
 
 ## Acknowledgements
 The sole aim of this project is to make one big easy to maintain index of all the diverse cows out there. All credits for the ASCII arts used goes to their respective designers.

@@ -24,4 +24,13 @@ fi
 
 # Find the user's shell
 shell=$(which $SHELL | rev | cut -f 1 -d '/' | rev)
+
+# Remove all previous instances of cpm and make a new one
+sed -i '/cow_selector/d' ~/."$shell"rc
 echo ". ~/cpm/cow_selector" >> ~/."$shell"rc
+
+echo "
+    *------------------------------*
+    | Your barn is ready. Enjoy !! |
+    *------------------------------*
+"
