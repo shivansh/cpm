@@ -10,20 +10,20 @@
 #                       ||     ||
 
 # Check if all the requirements are met.
-which cowsay &> /dev/null
-if [ $? -ne 0 ]; then
+if ! which cowsay &> /dev/null
+then
   echo "Please install cowsay to proceed !!"
   exit 1
 fi
 
-which fortune &> /dev/null
-if [ $? -ne 0 ]; then
+if ! which fortune &> /dev/null
+then
   echo "Please install fortune to proceed !!"
   exit 1
 fi
 
 # Find the user's shell
-shell=$(which $SHELL | rev | cut -f 1 -d '/' | rev)
+shell=$(which "$SHELL" | rev | cut -f 1 -d '/' | rev)
 
 # Remove all previous instances of cpm and make a new one
 sed -i '/cow_selector/d' ~/."$shell"rc

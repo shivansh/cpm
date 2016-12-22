@@ -17,11 +17,11 @@ fortune_cookie=$(echo "$fortune_msg" | sed -n 1p | cut -c2- | rev | cut -c2- | r
 i=0
 check=0
 # Find all cows compatible with the fortune_cookie, and choose one randomly.
-while read cookie_line
+while read -r cookie_line
 do
-  for cookie in $(echo $cookie_line | sed "s/,/ /g")
+  for cookie in $(echo "$cookie_line" | sed "s/,/ /g")
   do
-    if [ $i -eq 0 -a $check -eq 0 ]; then
+    if [ $i -eq 0 ] && [ $check -eq 0 ]; then
       check=1
       continue
     fi
@@ -34,6 +34,6 @@ if [ $i -eq 0 ]; then
   # Sadly, we don't have any cow associated with this cookie yet. Hence we use the "default" cow.
   echo "$fortune_msg" | tail -n +3 | cowsay
 else
-  rand=$[ $RANDOM % $i ]
-  echo "$fortune_msg" | tail -n +3 | cowsay -f ${cookie_arr[$rand]}
+  rand=$(( RANDOM % i ))
+  echo "$fortune_msg" | tail -n +3 | cowsay -f "${cookie_arr[$rand]}"
 fi

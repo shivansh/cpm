@@ -15,24 +15,24 @@ for cow in $(ls cows)
 do
   cow=$(echo "$cow" | cut -f 1 -d '.')
   cow_cookies=$(cat "cows/$cow.cow" | tail -1)
-  for cookie in $(echo $cow_cookies | sed "s/,/ /g")
+  for cookie in $(echo "$cow_cookies" | sed "s/,/ /g")
   do
     # Ignore end of file delimiters
-    if [ $cookie == "EOC" -o $cookie == "EOF" ]; then
+    if [ "$cookie" == "EOC" ] || [ "$cookie" == "EOF" ]; then
       continue
     fi
 
-    grep -q "$cookie" cookie_index
-    if [ $? -ne 0 ]; then
+    if ! grep -q "$cookie" cookie_index
+    then
       # We didn't find the "$cookie", hence append it
       sed -i "\$a$cookie" cookie_index
     fi
 
     # Retrieve ',' delimited "$cow_cookies" from cookie_index, and see if "$cow" is present
-    while read cookie_line
+    while read -r cookie_line
     do
       flag=0    # Flipped if "$cookie" in "cookie_index" already contains the "$cow"
-      for new_cookie in $(echo $cookie_line | sed "s/,/ /g")
+      for new_cookie in $(echo "$cookie_line" | sed "s/,/ /g")
       do
         if [ "$cow" == "$new_cookie" ]; then
           flag=1

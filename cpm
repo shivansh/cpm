@@ -11,7 +11,7 @@
 #                        ||     ||
 
 server="https://raw.githubusercontent.com/shivrai/cpm/master"   # Marketplace, all the deals happen here
-barn="~/cpm"      # This is where your cows reside in peace
+barn="$HOME/cpm"  # This is where your cows reside in peace
 fetch_index=0     # Flipped when user wants to update his entire barn
 clobber=0         # Flipped when user wants to have multiple similar cows
 TIMEOUT=2         # Sleep timeout duration (in seconds)
@@ -28,17 +28,17 @@ cleanup() {
 # cd $barn
 
 # Make sure you follow protocol while requesting cows...they can be stubborn sometimes.
-if [ $1 != "fetch" ]; then
+if [ "$1" != "fetch" ]; then
   moo="Usage: ./cpm fetch <cow>"
-  echo $moo | cowsay
+  echo "$moo" | cowsay
   exit 1
 fi
 
 # The default cow (atleast) is required for mooing out logs.
 # Plus, what use is a barn if there is not even a single cow in it ?
 if [ ! -f "cows/default.cow" ]; then
-  ( cd cows && wget "$server/cows/default.cow" -o cow-debug.log )
-  if [ $? -ne 0 ]; then
+  if ( cd cows && wget "$server/cows/default.cow" -o cow-debug.log ); then
+  # if [ $? -ne 0 ]; then
     sleep $TIMEOUT
     moo="
     *--------------------------------------*
@@ -59,19 +59,19 @@ fi
 
 # Brings the requested cow right into your barn.
 fetch_cow() {
-  ( cd cows && wget "$server/cows/$cow" -o cow-debug.log )
-  if [ $? -ne 0 ]; then
+  if ! ( cd cows && wget "$server/cows/$cow" -o cow-debug.log )
+  then
     if [ $clobber -eq 0 ]; then
       moo="Sadly no cow with this name exits."
     elif [ $clobber -eq 1 ]; then
       moo="Unable to fetch cow. View cow-debug.log for more details."
     fi
-    echo $moo | cowsay -e "oO"
+    echo "$moo" | cowsay -e "oO"
     cleanup
     exit 1
   elif [ $fetch_index -ne 1 ]; then
       moo="Enjoy your new holy cow !!"
-      echo $moo | cowsay -f $cow
+      echo "$moo" | cowsay -f "$cow"
   fi
 }
 
@@ -81,9 +81,9 @@ update_barn() {
   echo "Updating your barn..."
   # Add a timeout just to make things more interesting and lifelike (who says they are not ??)
   sleep $TIMEOUT
-  wget "$server/cow_index" -O new_cow_index -o cow-debug.log
-  if [ $? -ne 0 ]; then
-    echo "Unable to update index at the moment !! View cow-debug.log for more details." | cowsay -e "oO"
+  if ! wget "$server/cow_index" -O new_cow_index -o cow-debug.log
+  then
+    echo "Unable to update index at the moment !! View cow-debug.log for more details." | cowsay -e "oO";
     cleanup
   else
     # First get hold of the cows you currently have.
@@ -95,13 +95,13 @@ update_barn() {
     # In case your barn is up to date.
     if [ ! -s cow_diff ]; then
       moo="Seems like your barn is already up to date. Gotta say, Good Job !!"
-      echo $moo | cowsay -e "-O"
+      echo "$moo" | cowsay -e "-O"
       cleanup
       exit 1
     fi
     echo "Luring new cows..."
     sleep $TIMEOUT
-    while IFS='' read new_cow; do
+    while IFS='' read -r new_cow; do
       cow="$new_cow"
       fetch_cow
     done< "cow_diff"
@@ -112,7 +112,7 @@ update_barn() {
   fi
 }
 
-if [ ! -z $2 ]; then
+if [ ! -z "$2" ]; then
   cow="$2.cow"
 else
   update_barn
@@ -120,7 +120,7 @@ fi
 
 # Real magic happens here !!
 if [ -f "cows/$cow" ]; then
-  read -p "A cow with the same name already exists, continue? (y/n) " yn
+  read -r -p "A cow with the same name already exists, continue? (y/n) " yn
   case $yn in
     [n] ) exit;;
     [y] ) echo "Just a reminder ⇒ studies show that similar cows tend to fight more !!";
