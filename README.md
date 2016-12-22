@@ -62,6 +62,9 @@ The `cookie_index` gets populated when you run `update_cookie_index` script. In 
 So, for the results to get better, more and more cookie entries are required in the cow files. And this is where your valuable contributions come in. Add cookies which you think are most suitable for your favourite cows. The more entries you make, the better your (and everyone's) shell will become. <br>
 Currently, the `cow_index` is extremely minimal with a single populated entry.
 
+## In Action !!
+![Action](cpm.gif)
+
 ## Requirements
 * [cowsay](https://www.npmjs.com/package/cowsay)
 * fortune (available by default in most distros)
