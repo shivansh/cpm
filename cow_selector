@@ -21,7 +21,7 @@ while read cookie_line
 do
   for cookie in $(echo $cookie_line | sed "s/,/ /g")
   do
-    if [[ $i -eq 0 ]] && [[ $check -eq 0 ]]; then
+    if [ $i -eq 0 -a $check -eq 0 ]; then
       check=1
       continue
     fi
@@ -30,7 +30,7 @@ do
   done
 done < <(grep "$fortune_cookie" cookie_index)
 
-if [[ $i -eq 0 ]]; then
+if [ $i -eq 0 ]; then
   # Sadly we don't have any cow associated with this cookie yet, hence we use the "default" cow.
   echo "$fortune_msg" | tail -n +3 | cowsay
 else

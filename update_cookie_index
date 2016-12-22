@@ -23,14 +23,14 @@ do
       flag=0    # Flipped if "cookie" in "cookie_index" already contains the "$cow"
       for new_cookie in $(echo $cookie_line | sed "s/,/ /g")
       do
-        if [[ "$cow" == "$new_cookie" ]]; then
+        if [ "$cow" == "$new_cookie" ]; then
           flag=1
           break
         fi
       done
 
-      if [[ $flag -eq 0 ]]; then
-        # We didn't find the cow, append it
+      if [ $flag -eq 0 ]; then
+        # We didn't find the cow, hence append the "$cow" to the respective "$cookie"
         sed -i "/$cookie/ s/$/,$cow/" cookie_index
       fi
 

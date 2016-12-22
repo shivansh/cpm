@@ -38,6 +38,7 @@ Perhaps you might also find the above command useful in case some of your cows f
 ## Installation
 The installation script is brief -
 ```
+git clone https://github.com/shivrai/cpm.git
 shell=$(which $SHELL | rev | cut -f 1 -d '/' | rev)
 echo ". ~/cpm/cow_selector" >> ~/."$shell"rc
 ```
