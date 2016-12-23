@@ -34,6 +34,7 @@
                     | |   | |                 | || |
                     |\\   |\\                 |\\|\\ 
 ```
+- - -
 
 We have package managers for everything nowadays, then why keep our beloved cows behind...they are no less (believe me, I know !).
 
@@ -58,7 +59,7 @@ Each time you fire up your login shell,  the `cow_selector` script runs. It rand
 
 ### But there is a catch !!
 While generation of a random cookie is taken care of by the **fortune** command, the cow which gets displayed along is decided by the `cow_selector` script. And for that to happen the generated cookie needs to be associated with **atleast** one cow. The more entries there are in `cookie_index`, the more cow-cookie diversity will be there each time you start your shell. <br>
-The `cookie_index` gets populated when you run `update_cookie_index` script. In case the generated cookie is not associated with any cow, the [default cow](cows/default.cow) is used. <br>
+The `cookie_index` gets populated when you run `update_cookie_index` script. In case the generated cookie is not associated with any cow, a randomly generated cow is used. <br>
 So, for the results to get better, more and more cookie entries are required in the cow files. And this is where your valuable contributions come in. Add cookies which you think are most suitable for your favourite cows. The more entries you make, the better your (and everyone's) shell will become. <br>
 Currently, the `cow_index` is extremely minimal with a single populated entry.
 
@@ -76,7 +77,7 @@ git clone https://github.com/shivrai/cpm.git
 ./install
 ```
 
-## Want to contribute ?
+## Contributing
 Have a new ASCII art ? Want to associate a cow with new cookies ? Pull requests are more than welcome.
 
 After adding new cows, update `cow_index` by running -
@@ -88,7 +89,7 @@ After adding adding cookies to cow files, run the following command -
 ```
 ./update_cookie_index
 ```
-This will automatically update the `cookie_index` will all the new cow(s) associated with their corresponding cookies.
+This will automatically update the `cookie_index` with all the new cow(s) associated with their corresponding cookies.
 
 Some conventions to be taken care of while making changes -
 * When adding new cookies to cow files, make sure you use a `,` for delimiting.

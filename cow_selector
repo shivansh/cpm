@@ -26,13 +26,13 @@ do
       continue
     fi
     cookie_arr[$i]="$cookie"
-    ((i=i+1))
+    ((i++))
   done
 done < <(grep "$fortune_cookie" ~/cpm/cookie_index)
 
 if [ $i -eq 0 ]; then
-  # Sadly, we don't have any cow associated with this cookie yet. Hence we use the "default" cow.
-  echo "$fortune_msg" | tail -n +3 | cowsay
+  # Sadly, we don't have any cow associated with this cookie yet. Hence we generate one randomly.
+  echo "$fortune_msg" | tail -n +3 | cowsay -f $(ls ~/cpm/cows/ | shuf -n1)
 else
   rand=$(( RANDOM % i ))
   echo "$fortune_msg" | tail -n +3 | cowsay -f "${cookie_arr[$rand]}"
