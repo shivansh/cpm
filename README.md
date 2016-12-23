@@ -1,13 +1,10 @@
 # CPM - The Cow Package Manager
 
 ```
-                       _________________________________
-                      | Updating and managing your cows |
-                      | just got easy and lot more fun. |
-                       ---------------------------------
-                              o
-                               o
-                                 o   #####
+                                                   _________________________________
+                                                  | Updating and managing your cows |
+                                             o  o | just got easy and lot more fun. |
+                                    #####  o       ---------------------------------
                                    #### _\_
                                    ##=-[•]•]   :::
                                    #(    _\   `'_:
@@ -38,6 +35,11 @@
 
 We have package managers for everything nowadays, then why keep our beloved cows behind...they are no less (believe me, I know !).
 
+<p align="center">
+  <img alt="CPM in action" src="cpm.gif">
+</p>
+- - -
+
 ## Naming conventions
 * The **barn** refers to the project's home directory (`~/cpm`).
 * **Fortune cookie** (or simply **cookie**) refer to a category of fortune messages. <br>
@@ -61,10 +63,7 @@ Each time you fire up your login shell,  the `cow_selector` script runs. It rand
 While generation of a random cookie is taken care of by the **fortune** command, the cow which gets displayed along is decided by the `cow_selector` script. And for that to happen the generated cookie needs to be associated with **atleast** one cow. The more entries there are in `cookie_index`, the more cow-cookie diversity will be there each time you start your shell. <br>
 The `cookie_index` gets populated when you run `update_cookie_index` script. In case the generated cookie is not associated with any cow, a randomly generated cow is used. <br>
 So, for the results to get better, more and more cookie entries are required in the cow files. And this is where your valuable contributions come in. Add cookies which you think are most suitable for your favourite cows. The more entries you make, the better your (and everyone's) shell will become. <br>
-Currently, the `cow_index` is extremely minimal with a single populated entry.
-
-## In Action !!
-![Action](cpm.gif)
+Currently, the `cookie_index` is extremely minimal with a single populated entry.
 
 ## Requirements
 * [cowsay](https://www.npmjs.com/package/cowsay)

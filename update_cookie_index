@@ -11,6 +11,7 @@
 #                       ||----w |
 #                       ||     ||
 
+set -e
 for cow in $(ls cows)
 do
   cow=$(echo "$cow" | cut -f 1 -d '.')

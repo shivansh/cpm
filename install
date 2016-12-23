@@ -9,6 +9,7 @@
 #                       ||----w |
 #                       ||     ||
 
+set -e
 # Check if all the requirements are met.
 if ! which cowsay &> /dev/null
 then

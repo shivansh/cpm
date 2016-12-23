@@ -10,6 +10,7 @@
 #                        ||----w |
 #                        ||     ||
 
+set -e
 server="https://raw.githubusercontent.com/shivrai/cpm/master"   # Marketplace, all the deals happen here
 barn="$HOME/cpm"  # This is where your cows reside in peace
 fetch_index=0     # Flipped when user wants to update his entire barn
