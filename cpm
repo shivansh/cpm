@@ -38,7 +38,7 @@ fi
 # The default cow (atleast) is required for mooing out logs.
 # Plus, what use is a barn if there is not even a single cow in it ?
 if [ ! -f "cows/default.cow" ]; then
-  if ( cd cows && wget "$server/cows/default.cow" -o cow-debug.log ); then
+  if ( cd cows && wget "$server/cows/default.cow" -o "$barn/cow-debug.log" ); then
   # if [ $? -ne 0 ]; then
     sleep $TIMEOUT
     moo="
@@ -60,7 +60,7 @@ fi
 
 # Brings the requested cow right into your barn.
 fetch_cow() {
-  if ! ( cd cows && wget "$server/cows/$cow" -o cow-debug.log )
+  if ! ( cd cows && wget "$server/cows/$cow" -o "$barn/cow-debug.log" )
   then
     if [ $clobber -eq 0 ]; then
       moo="Sadly no cow with this name exits."
@@ -82,7 +82,7 @@ update_barn() {
   echo "Updating your barn..."
   # Add a timeout just to make things more interesting and lifelike (who says they are not ??)
   sleep $TIMEOUT
-  if ! wget "$server/cow_index" -O new_cow_index -o cow-debug.log
+  if ! wget "$server/cow_index" -O new_cow_index -o "$barn/cow-debug.log"
   then
     echo "Unable to update index at the moment !! View cow-debug.log for more details." | cowsay -e "oO";
     cleanup
