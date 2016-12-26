@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #       *-------------------------------------------*
 #       | Updates the "cookie_index" by associating |

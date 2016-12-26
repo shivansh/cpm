@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #       *-------------------------------------------------------*
 #       | Finds all cows compatible with the randomly generated |
@@ -28,7 +28,7 @@ do
     cookie_arr[$i]="$cookie"
     ((i++))
   done
-done < <(grep "$fortune_cookie" ~/cpm/cookie_index)
+done < <(grep "$fortune_cookie" "$HOME"/cpm/cookie_index)
 
 if [ $i -eq 0 ]; then
   # Sadly, we don't have any cow associated with this cookie yet. Hence we generate one randomly.

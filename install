@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #       *------------------------------------------*
 #       | Use this script for setting up your barn |
@@ -27,8 +27,15 @@ fi
 shell=$(which "$SHELL" | rev | cut -f 1 -d '/' | rev)
 
 # Remove all previous instances of cpm and make a new one
-sed -i '/cow_selector/d' ~/."$shell"rc
-echo ". ~/cpm/cow_selector" >> ~/."$shell"rc
+# Following check is necessary for compatibility of sed across different OS
+if [ "$(uname)" == "Darwin" ]; then
+  # Using "-i" with sed on Mac OS X requires an extension for the backup file
+  sed -i .bak '/cow_selector/d' "$HOME/.$shell"rc
+else
+  sed -i '/cow_selector/d' "$HOME/.$shell"rc
+fi
+
+echo ". $HOME/cpm/cow_selector" >> "$HOME/.$shell"rc
 
 echo "
     *------------------------------*
