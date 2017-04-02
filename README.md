@@ -38,6 +38,7 @@ We have package managers for everything nowadays, then why keep our beloved cows
 <p align="center">
   <img alt="CPM in action" src="cpm.gif">
 </p>
+
 - - -
 
 ## Naming conventions

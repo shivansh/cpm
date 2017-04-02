@@ -16,13 +16,14 @@ barn="$HOME/cpm"  # This is where your cows reside in peace
 fetch_index=0     # Flipped when user wants to update his entire barn
 clobber=0         # Flipped when user wants to have multiple similar cows
 TIMEOUT=2         # Sleep timeout duration (in seconds)
+EXITSTATUS=0
 
 trap cleanup SIGINT SIGTERM SIGHUP
 
 cleanup() {
   rm -f new_cow_index
   rm -f cow_diff
-  exit 0
+  exit $EXITSTATUS
 }
 
 # Walk up to your barn, the cows cannot use telecommunication yet!!
@@ -39,7 +40,6 @@ fi
 # Plus, what use is a barn if there is not even a single cow in it ?
 if [ ! -f "cows/default.cow" ]; then
   if ( cd cows && wget "$server/cows/default.cow" -o "$barn/cow-debug.log" ); then
-  # if [ $? -ne 0 ]; then
     sleep $TIMEOUT
     moo="
     *--------------------------------------*
@@ -63,13 +63,12 @@ fetch_cow() {
   if ! ( cd cows && wget "$server/cows/$cow" -o "$barn/cow-debug.log" )
   then
     if [ $clobber -eq 0 ]; then
-      moo="Sadly no cow with this name exits."
+      moo="Sadly no cow with the name '$cow' exits."
     elif [ $clobber -eq 1 ]; then
       moo="Unable to fetch cow. View cow-debug.log for more details."
     fi
     echo "$moo" | cowsay -e "oO"
-    cleanup
-    exit 1
+    EXITSTATUS=1 && cleanup
   elif [ $fetch_index -ne 1 ]; then
       moo="Enjoy your new holy cow !!"
       echo "$moo" | cowsay -f "$cow"
@@ -85,7 +84,7 @@ update_barn() {
   if ! wget "$server/cow_index" -O new_cow_index -o "$barn/cow-debug.log"
   then
     echo "Unable to update index at the moment !! View cow-debug.log for more details." | cowsay -e "oO";
-    cleanup
+    EXITSTATUS=0 && cleanup
   else
     # First get hold of the cows you currently have.
     # Cows sometimes flee (bad barn maybe ?), hence it is best practice to generate a fresh new index.
@@ -97,8 +96,7 @@ update_barn() {
     if [ ! -s cow_diff ]; then
       moo="Seems like your barn is already up to date. Gotta say, Good Job !!"
       echo "$moo" | cowsay -e "-O"
-      cleanup
-      exit 1
+      EXITSTATUS=1 && cleanup
     fi
     echo "Luring new cows..."
     sleep $TIMEOUT
@@ -109,7 +107,7 @@ update_barn() {
     ( echo -e "These cows were added to your barn ⇒  \n" && cat cow_diff ) | cowsay
     # Update the cow_index
     mv -f new_cow_index cow_index
-    cleanup
+    EXITSTATUS=0 && cleanup
   fi
 }
 
