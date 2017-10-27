@@ -63,7 +63,7 @@ fetch_cow() {
   if ! ( cd cows && wget "$server/cows/$cow" -o "$barn/cow-debug.log" )
   then
     if [ $clobber -eq 0 ]; then
-      moo="Sadly no cow with the name '$cow' exits."
+      moo="Sadly no cow with the name '$cow' exists."
     elif [ $clobber -eq 1 ]; then
       moo="Unable to fetch cow. View cow-debug.log for more details."
     fi
