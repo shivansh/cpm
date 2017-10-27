@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+#       *----------------------------------------*
+#       | Use this script for removing your barn |
+#       *----------------------------------------*
+#               o   ^__^
+#                o  (OO)\_______
+#                   (__)\       )\/\
+#                       ||----w |
+#                       ||     ||
+
+set -e
+# Find the user's shell
+shell=$(which "$SHELL" | rev | cut -f 1 -d '/' | rev)
+
+# Remove all instances of cpm
+# Following check is necessary for compatibility of sed across different OS
+if [ "$(uname)" == "Darwin" ]; then
+  # Using "-i" with sed on Mac OS X requires an extension for the backup file
+  sed -i .bak '/cow_selector/d' "$HOME/.$shell"rc
+else
+  sed -i '/cow_selector/d' "$HOME/.$shell"rc
+fi
+
+rm -rf "$HOME"/cpm
+
+echo "
+    *----------------------------------------*
+    | Your barn is removed. See you again !! |
+    *----------------------------------------*
+"
