@@ -67,7 +67,7 @@ fetch_cow() {
     elif [ $clobber -eq 1 ]; then
       moo="Unable to fetch cow. View cow-debug.log for more details."
     fi
-    echo "$moo" | cowsay -e "oO"
+    echo "$moo" | cowsay -d
     EXITSTATUS=1 && cleanup
   elif [ $fetch_index -ne 1 ]; then
       moo="Enjoy your new holy cow !!"
