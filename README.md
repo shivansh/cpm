@@ -73,8 +73,14 @@ Currently, the `cookie_index` is extremely minimal with a single populated entry
 ## Installation
 The [installation script](install) is brief -
 ```
-git clone https://github.com/shivrai/cpm.git
+git clone https://github.com/shivrai/cpm.git && cd cpm
 ./install
+```
+
+## Uninstallation
+Alas, not every association is meant to last forever. Hope you enjoyed your cows! 
+```
+./uninstall
 ```
 
 ## Contributing
